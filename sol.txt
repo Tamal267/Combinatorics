@@ -58,6 +58,10 @@ for each bit [0, 30]:
 	}
 
 
+7. ⁠Compute the sum of XOR of all pairs.
+
+for each bit: cnt_one * cnt_zero * (1 << bit)
+
 
 8. ⁠Compute the XOR of the bitwise OR of every subarray.
 
