@@ -1,0 +1,107 @@
+1. Compute the total of all subarray sums.
+
+1 2 3 4 5
+sum += i * (n - i + 1) * a[i];
+
+
+2. ⁠Compute the total of all subsequence sums.
+
+1 2 3
+1, 2, 3, 1 2, 1 3, 2 3, 1 2 3
+sum += (2 ^ (n - 1)) * a[i];
+
+
+3. ⁠Compute the sum of maximum values over all subarrays.
+
+1 2 1 1 1 1 3 2
+for 4th element:
+right_greater_eq[4] = 5
+left_greater[4] = 2
+contribution: (5 - 3 - 1) * 1
+
+sum += (right_greater_eq[i] - left_greater[i] - 1) * a[i];
+
+
+4. ⁠Compute the sum of distinct-element counts over all subarrays.
+
+dp[i] : number of distinct elements of all subarray ending at i.
+last[a[i]] : the last occurrence of a[i].
+dp[i] = dp[i - 1] + i - last[a[i]];
+
+sum = sum of dp[i] for all i(1 <= i <= n).
+
+
+5. ⁠Compute the sum of bitwise OR values over all subarrays.
+
+vector<int> first_occ(30, n + 1);
+for each bit [0, 30]:
+	sum += (n - first_occ[bit] + 1) * (1 << bit);
+
+
+
+6. ⁠Compute the sum of bitwise XOR values over all subarrays.
+
+ans = one = last_odd = 0
+for each bit [0, 30]:
+	for (int i = 1; i <= n; i++) {
+		if (a[i] >> i & 1) {
+			one++;
+			if (one % 2 == 1) {
+				last_odd = i;
+				ans += last_odd * (1 << bit);
+			}
+		} else {
+			if (one % 2 == 1) {
+				ans += last_odd * (1 << bit);
+			}
+		}
+	}
+
+
+
+8. ⁠Compute the XOR of the bitwise OR of every subarray.
+
+
+vector<int> first_occ(30, n + 1);
+for each bit [0, 30]:
+	if ((n - first_occ[bit] + 1) % 2 == 1) ans += 1 << bit;
+
+
+
+9. ⁠Given a tree, compute the total length of all simple paths.
+
+down[u] : sum of all simple paths starting from child and end at u
+up[u] : sum of all simple paths coming from parent and end at u
+
+void dfs(int u, int p) {
+	down[u] = 0;
+	for (int v : g[u]) {
+		if (v == p) continue;
+		dfs(v, u);
+		down[u] = down[v] + 1;
+	}
+}
+
+void reroot(int u, int p) {
+	for (int v : g[u]) {
+		if (v == p) continue;
+		up[v] = up[u] + down[u] - (down[v] + 1) + 1;
+		reroot(v, u);
+	}
+}
+
+
+10. ⁠Given two strings, find the minimum Hamming distance among all cyclic shifts of one string.
+
+O(n ^ 2)
+for (int i = 0; i < n; i++) {
+	int cnt = 0;
+	for (int j = 0; j < n; j++) 
+		if (s[i] != s[(i + j) % n]) cnt++;
+	ans = min(ans, cnt);
+}
+
+
+
+
+
