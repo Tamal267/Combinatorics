@@ -104,4 +104,44 @@ for (int i = 0; i < n; i++) {
 
 
 
+11. ⁠Compute the sum of products over all subsequences.
 
+(1 + a)(1 + b)(1 + c)
+= (1 + b + a + ab)(1 + c)
+= 1 + c + b + bc + a + ac + ab + abc
+
+
+12. ⁠Given an array and queries of increment on ranges (CF 276C), compute the final weighted sum after applying all increments optimally.
+
+https://codeforces.com/contest/276/submission/221027331
+
+
+13. ⁠Compute the sum of divisors for every number from 1 to N.
+
+N log log N
+for (int i = 1; i < N; i++) {
+	for (int j = i; j < N; j += i) {
+		sum += i;
+	}
+}
+
+14. ⁠Compute the sum of absolute differences over all pairs.
+
+Order doesn't matter. sort the array.
+1 2 3 4 5
+sum += (i - 1) * a[i] - pref[i - 1];
+
+
+15. ⁠Given a tree, compute the sum of distinct-element counts over all simple paths.
+
+16. ⁠Compute the sum of widths over all subsequences (width = max – min).
+
+17. ⁠Compute the total Hamming distance over all pairs.
+
+18. ⁠Compute the sum of inversion counts over all permutations of {1 … n}.
+
+nc2 * n! / 2
+
+19. ⁠Compute the sum of inversion count over all binary strings with x zeros and y ones.
+
+nc2 * (x + y - 2)! / ((x - 1)! * (y - 1)!)
