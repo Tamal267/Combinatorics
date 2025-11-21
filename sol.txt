@@ -136,6 +136,20 @@ sum += (i - 1) * a[i] - pref[i - 1];
 
 16. ⁠Compute the sum of widths over all subsequences (width = max – min).
 
+Order doesn't matter. sort the array.
+focus on every pair (l, r).
+a[l] will be min and a[r] will be max. from l to r we have 2 ^ (r - l - 1) way to chose elements.
+so for a pair (l, r) ans = (a[r] - a[l]) * 2 ^ (r - l - 1)
+
+fix r.
+suppose r = 4.
+(a[4] - a[3]) * power(2, 4 - 3 - 1) +
+(a[4] - a[2]) * power(2, 4 - 2 - 1) +
+(a[4] - a[1]) * power(2, 4 - 1 - 1)
+
+pref[i] = pref[i - 1] + a[i] * 2 ^ (-i)
+sum += a[r] * ((2 ^ (r - 1)) - 1) - pref[r - 1] * (2 ^ (r - 1));
+
 17. ⁠Compute the total Hamming distance over all pairs.
 
 18. ⁠Compute the sum of inversion counts over all permutations of {1 … n}.
